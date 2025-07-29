@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guess The Number Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #f9d423, #ff4e50);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      text-align: center;
+      width: 350px;
+    }
+
+    input[type="number"] {
+      padding: 10px;
+      width: 70%;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 8px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #ff4e50;
+      color: white;
+    }
+
+    button:hover {
+      background-color: #e03e3e;
+    }
+
+    #hint {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🎯 Guess The Number!</h1>
+
+    <div id="setup">
+      <p>Enter the maximum number:</p>
+      <input type="number" id="maxInput" />
+      <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <div id="game" style="display:none;">
+      <p>Guess a number between 1 and <span id="maxDisplay"></span>:</p>
+      <input type="number" id="guessInput" />
+      <div>
+        <button onclick="checkGuess()">Guess</button>
+        <button onclick="quitGame()">Quit</button>
+      </div>
+      <p id="hint"></p>
+    </div>
+  </div>
+
+  <script>
+    let randomNumber = null;
+
+    function startGame() {
+      const max = parseInt(document.getElementById("maxInput").value);
+      if (isNaN(max) || max <= 0) {
+        alert("Please enter a valid positive number.");
+        return;
+      }
+      randomNumber = Math.floor(Math.random() * max) + 1;
+      console.log("Random number:", randomNumber);
+      document.getElementById("maxDisplay").textContent = max;
+      document.getElementById("setup").style.display = "none";
+      document.getElementById("game").style.display = "block";
+    }
+
+    function checkGuess() {
+      const guess = parseInt(document.getElementById("guessInput").value);
+      if (isNaN(guess)) {
+        document.getElementById("hint").textContent = "❗ Please enter a number.";
+        return;
+      }
+
+      if (guess === randomNumber) {
+        document.getElementById("hint").textContent = `🎉 Correct! The number was ${randomNumber}.`;
+      } else if (guess < randomNumber) {
+        document.getElementById("hint").textContent = "📉 Too low! Try again.";
+      } else {
+        document.getElementById("hint").textContent = "📈 Too high! Try again.";
+      }
+    }
+
+    function quitGame() {
+      document.getElementById("hint").textContent = "👋 You quit the game.";
+      document.getElementById("guessInput").disabled = true;
+    }
+  </script>
+
+</body>
+</html>
