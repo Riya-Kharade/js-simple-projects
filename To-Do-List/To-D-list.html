@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>📝 To-Do List with Time & Done</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #c9d6ff, #e2e2e2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      width: 420px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input[type="text"] {
+      width: 70%;
+      padding: 10px;
+      margin-right: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      background-color: #3cba92;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2fa07f;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    li {
+      background: #f0f0f0;
+      padding: 12px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .task-row {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .done {
+      text-decoration: line-through;
+      color: #888;
+    }
+
+    .time {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .delete-btn {
+      background-color: #ff6f61;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    .delete-btn:hover {
+      background-color: #e4574f;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📝 To-Do List</h1>
+    <input type="text" id="taskInput" placeholder="Enter a new task" />
+    <button onclick="addTask()">Add</button>
+
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    let todo = [];
+
+    function getCurrentTime() {
+      const now = new Date();
+      return now.toLocaleString('en-IN', {
+        day: '2-digit',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+      });
+    }
+
+    function addTask() {
+      const input = document.getElementById("taskInput");
+      const taskText = input.value.trim();
+
+      if (taskText !== "") {
+        const task = {
+          text: taskText,
+          done: false,
+          time: getCurrentTime()
+        };
+        todo.push(task);
+        input.value = "";
+        renderList();
+      } else {
+        alert("Please enter a task.");
+      }
+    }
+
+    function toggleDone(index) {
+      todo[index].done = !todo[index].done;
+      renderList();
+    }
+
+    function deleteTask(index) {
+      todo.splice(index, 1);
+      renderList();
+    }
+
+    function renderList() {
+      const list = document.getElementById("taskList");
+      list.innerHTML = "";
+
+      todo.forEach((task, index) => {
+        const li = document.createElement("li");
+
+        const taskRow = document.createElement("div");
+        taskRow.classList.add("task-row");
+
+        const label = document.createElement("label");
+        label.style.display = "flex";
+        label.style.alignItems = "center";
+        label.style.gap = "10px";
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = task.done;
+        checkbox.onchange = () => toggleDone(index);
+
+        const span = document.createElement("span");
+        span.textContent = task.text;
+        if (task.done) span.classList.add("done");
+
+        label.appendChild(checkbox);
+        label.appendChild(span);
+
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "Delete";
+        delBtn.className = "delete-btn";
+        delBtn.onclick = () => deleteTask(index);
+
+        taskRow.appendChild(label);
+        taskRow.appendChild(delBtn);
+
+        const time = document.createElement("div");
+        time.className = "time";
+        time.textContent = "Added: " + task.time;
+
+        li.appendChild(taskRow);
+        li.appendChild(time);
+        list.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>
