@@ -31,3 +31,23 @@ You can open the `index.html` file directly in a browser to try it out.
 1. Clone this repository:
    ```bash
    git clone https://github.com/riya-kharade/js-simple-projects.git
+
+2. Open any project folder.
+Run .html in a browser.
+
+---
+## 📌 Suitable For
+-Students and beginners in JavaScript
+
+-Those who want to build logic without frameworks
+
+-Mini project practice for college or self-learning
+
+---
+## 🙋‍♀️ Author
+Made with ❤️ by Riya Kharade
+GitHub: https://github.com/riya-kharade
+
+## 📄 License
+This project is open-source and free to use for learning and personal use.
+
