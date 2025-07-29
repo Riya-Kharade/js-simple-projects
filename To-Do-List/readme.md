@@ -34,7 +34,7 @@ This project helps beginners understand DOM manipulation, user input handling, a
    ```
    cd js-simple-projects/project-02
    ```
-3. Open `index.html` in any web browser.
+3. Open `to-do-list.html` in any web browser.
 
 ---
 
@@ -53,7 +53,7 @@ This project helps beginners understand DOM manipulation, user input handling, a
 ```
 project-02/
 ├── to-do-list.html
-└── README.md
+└── readme.md
 ```
 
 ---
