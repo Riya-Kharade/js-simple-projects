@@ -79,7 +79,7 @@ guess-the-number-game/
 
 ## 🙋‍♀️ Author
 
-Made with ❤️ by \[Riya Kharade]
+Made with ❤️ by Riya Kharade
 GitHub: [https://github.com/riya-kharade](https://github.com/riya-kharade)
 
 ---
