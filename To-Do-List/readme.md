@@ -32,7 +32,7 @@ This project helps beginners understand DOM manipulation, user input handling, a
    ```
 2. Navigate to the folder:
    ```
-   cd js-simple-projects/project-02
+   cd js-simple-projects/to-do-list
    ```
 3. Open `to-do-list.html` in any web browser.
 
